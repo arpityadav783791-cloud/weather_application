@@ -1,0 +1,43 @@
+name: weather_application
+description: "A new Flutter weather application project."
+publish_to: 'none' # Prevents accidental publishing to pub.dev
+
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.5.0 # Use your current Dart SDK version range
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  # Common utility packages (Add your required versions here)
+  cupertino_icons: ^1.0.8
+  get: ^4.6.6
+  go_router: ^16.2.0
+  shared_preferences: ^2.5.5
+  http: ^1.6.0
+  geolocator: ^14.0.3
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  # Linter rules for clean and consistent code
+  flutter_lints: ^4.0.0
+
+flutter:
+  uses-material-design: true
+
+  # To include assets, uncomment the lines below and adjust paths:
+  # assets:
+  #   - assets/images/
+  #   - assets/icons/
+
+  # To include custom fonts, uncomment the lines below:
+  # fonts:
+  #   - family: CustomFont
+  #     fonts:
+  #       - asset: assets/fonts/CustomFont-Regular.ttf
+  #       - asset: assets/fonts/CustomFont-Bold.ttf
+  #         weight: 700
