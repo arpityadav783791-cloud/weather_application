@@ -828,12 +828,14 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  Widget _buildBottomNavigation() {
+ Widget _buildBottomNavigation() {
+    final bottomPadding = MediaQuery.of(context).padding.bottom;
+
     return Container(
-      height: 78,
+      padding: EdgeInsets.only(bottom: bottomPadding),
       decoration: BoxDecoration(
         color: _surfaceColor(context),
-        boxShadow:const [
+        boxShadow: const [
           BoxShadow(
             color: Color(0x12000000),
             blurRadius: 24,
@@ -841,39 +843,38 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ],
       ),
-      child: SafeArea(
-        top: false,
+      child: SizedBox(
+        height: 70,
         child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            _navItem(
-              icon: Icons.home_rounded,
-              label: 'Home',
-              selected: true,
-              onTap: (){
-                context.go('/home');
-              }
+            Expanded(
+              child: _navItem(
+                icon: Icons.home_rounded,
+                label: 'Home',
+                selected: true,
+                onTap: () => context.go('/home'),
+              ),
             ),
-            _navItem(
-              icon: Icons.map_outlined,
-              label: 'Map',
-              onTap: (){
-                context.go('/map');
-              },
+            Expanded(
+              child: _navItem(
+                icon: Icons.map_outlined,
+                label: 'Map',
+                onTap: () => context.go('/map'),
+              ),
             ),
-            _navItem(
-              icon: Icons.favorite_border_rounded,
-              label: 'Saved',
-              onTap: (){
-                context.go('/saved');
-              },
+            Expanded(
+              child: _navItem(
+                icon: Icons.favorite_border_rounded,
+                label: 'Saved',
+                onTap: () => context.go('/saved'),
+              ),
             ),
-            _navItem(
-              icon: Icons.person_outline_rounded,
-              label: 'Profile',
-              onTap: (){
-                context.go('/profile');
-              }
+            Expanded(
+              child: _navItem(
+                icon: Icons.person_outline_rounded,
+                label: 'Profile',
+                onTap: () => context.go('/profile'),
+              ),
             ),
           ],
         ),
@@ -881,43 +882,44 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  Widget _navItem({
-  required IconData icon,
-  required String label,
-  bool selected = false,
-  VoidCallback? onTap,
-}) {
-  return InkWell(
-    onTap: onTap,
-    child: SizedBox(
-      width: 65,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Icon(
-            icon,
-            color: selected
-                ? HomeScreen.primaryBlue
-                : const Color(0xFF98A2B3),
-          ),
-          const SizedBox(height: 4),
-          Text(
-            label,
-            style: TextStyle(
-              color: selected
-                  ? HomeScreen.primaryBlue
-                  : const Color(0xFF98A2B3),
-              fontSize: 11,
-              fontWeight: selected
-                  ? FontWeight.w700
-                  : FontWeight.w500,
+ Widget _navItem({
+    required IconData icon,
+    required String label,
+    bool selected = false,
+    VoidCallback? onTap,
+  }) {
+    return InkWell(
+      onTap: onTap,
+      child: Center(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Icon(
+              icon,
+              size: 24,
+              color:
+                  selected ? HomeScreen.primaryBlue : const Color(0xFF98A2B3),
             ),
-          ),
-        ],
+            const SizedBox(height: 4),
+            Flexible(
+              child: Text(
+                label,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                style: TextStyle(
+                  fontSize: 11,
+                  fontWeight: selected ? FontWeight.w700 : FontWeight.w500,
+                  color: selected
+                      ? HomeScreen.primaryBlue
+                      : const Color(0xFF98A2B3),
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
-    ),
-  );
-}
+    );
+  }
   Widget _buildHeader(BuildContext context) {
     return Row(
       children: [
